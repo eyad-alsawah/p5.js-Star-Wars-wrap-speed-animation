@@ -86,7 +86,7 @@ function draw() {
  var ex =sin(radians(leftShootingAngle)) *leftShootingLineHypotenuseEnd+130;
  var y = cos(radians(leftShootingAngle))*leftShootingLineHypotenuseStart+130;
  var ey = cos(radians(leftShootingAngle))*leftShootingLineHypotenuseEnd+130;
-  strokeWeight(5);
+  strokeWeight(3);
   line(x, y, ex, ey);
   //-----------------------------------------------------
 
@@ -97,7 +97,7 @@ function draw() {
  var ex =sin(radians(rightShootingAngle)) *rightShootingLineHypotenuseEnd+210;
  var y = cos(radians(rightShootingAngle))*rightShootingLineHypotenuseStart+156;
  var ey = cos(radians(rightShootingAngle))*rightShootingLineHypotenuseEnd+156;
-  strokeWeight(5);
+  strokeWeight(3);
   line(x, y, ex, ey);
   //----------------------------------------------------
 
