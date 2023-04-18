@@ -3,9 +3,9 @@ var leftShootingLineHypotenuseStart = 40;
 let song;
 let blasterSound;
 let button;
-let allowShoot=true;
+let allowShootLeft=true;
+let allowShootRight=true;
 let speedSlider;
-let laserSlider;
 let centerX = 250;
 let centerY = 150;
 let startX = 250;
@@ -21,17 +21,16 @@ function setup() {
   button =createButton('shoot'
   );
   button.mousePressed(allowShooting);
-  laserSlider =createSlider(0,360);
   frameRate(20);
 }
 
-function shoot(){
-  if(!allowShoot){return;}
+function shootLeft(){
+  if(!allowShootLeft){return;}
   if(leftShootingLineHypotenuseEnd ==115|| leftShootingLineHypotenuseStart==110){
     leftShootingLineHypotenuseStart=40;
     leftShootingLineHypotenuseEnd=45;
     
-    allowShoot=false;
+    allowShootLeft=false;
     return;
   }
   
@@ -41,9 +40,26 @@ function shoot(){
 
   
 }
+function shootRight(){
+  if(!allowShootRight){return;}
+  if(rightShootingLineHypotenuseEnd ==45|| rightShootingLineHypotenuseStart==40){
+    rightShootingLineHypotenuseStart=110;
+   rightShootingLineHypotenuseEnd=115;
+    
+   allowShootRight=false;
+    return;
+  }
+  
+  rightShootingLineHypotenuseStart = rightShootingLineHypotenuseStart-10;
+  rightShootingLineHypotenuseEnd= rightShootingLineHypotenuseEnd-10;
+
+
+  
+}
 
 function allowShooting(){
-  allowShoot =true;
+  allowShootLeft =true;
+  allowShootRight =true;
   blasterSound.play();
   // s=40;
   //    d=45;
@@ -57,9 +73,9 @@ function preload() {
 var rightShootingLineHypotenuseStart = 40;
 var rightShootingLineHypotenuseEnd =45;
 function draw() {
-  shoot();
+  shootLeft();
+  shootRight();
   background(0);
- 
   frameRate(40);
 
   //-------------------------------------
@@ -74,19 +90,19 @@ function draw() {
   line(x, y, ex, ey);
   //-----------------------------------------------------
 
-  var rightShootingAngle =80;
+  var rightShootingAngle =100;
   stroke(255,165,0);
-  if(rightShootingLineHypotenuseEnd==55){circle(136,136,50);}
- var x =  sin(radians(rightShootingAngle)) *rightShootingLineHypotenuseStart+130;
- var ex =sin(radians(rightShootingAngle)) *rightShootingLineHypotenuseEnd+130;
- var y = cos(radians(rightShootingAngle))*rightShootingLineHypotenuseStart+130;
- var ey = cos(radians(rightShootingAngle))*rightShootingLineHypotenuseEnd+130;
+  if(rightShootingLineHypotenuseEnd==95){circle(315,135,50);}
+ var x =  sin(radians(rightShootingAngle)) *rightShootingLineHypotenuseStart+210;
+ var ex =sin(radians(rightShootingAngle)) *rightShootingLineHypotenuseEnd+210;
+ var y = cos(radians(rightShootingAngle))*rightShootingLineHypotenuseStart+156;
+ var ey = cos(radians(rightShootingAngle))*rightShootingLineHypotenuseEnd+156;
   strokeWeight(5);
   line(x, y, ex, ey);
   //----------------------------------------------------
 
   strokeWeight(1);
- 
+ console.log(rightShootingLineHypotenuseEnd,rightShootingLineHypotenuseStart);
   stroke(194, 211, 228);
   radiusList.forEach(radius => {
     var angle = Math.floor(Math.random() * 360);
@@ -96,8 +112,7 @@ function draw() {
     var endY = centerY + radius * speedSlider.value() * sin(radians(angle));
     line(startX, startY, endX, endY);
   });
-  
-  image(millenniumFalcon, 0, 0, 500, 500);
+image(millenniumFalcon, 0, 0, 500, 500);
 }
 
 
